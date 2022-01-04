@@ -8,6 +8,10 @@ const config = {
     path: path.resolve(__dirname, './static/dist'),
     filename: 'bundle.js'
   },
+  devServer: {
+    writeToDisk: true, // Write files to disk in dev mode, so Django can serve the assets
+    hot: true
+  },
   module: {
     rules: [
       {
@@ -49,19 +53,26 @@ const config = {
         test: /\.ts(x)?$/,
         loader: 'ts-loader',
         exclude: /node_modules/
-      }
+      },
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
+  }),
   ],
   resolve: {
+
     extensions: [
       '.tsx',
       '.ts',
       '.js'
     ]
-  }
+  },
+
 };
 
 module.exports = config;

@@ -2,15 +2,108 @@
 {% load static %}
 
 <html>
+    <!--
+	Verti by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    -->
     <head>
         <title>{{ title }}</title>
         <link href="{% static 'dist/main.css' %}" rel="stylesheet">
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 
     </head>
-    <body>
-        {% block content %}
-        {% endblock %}
-        
 
-    </body>
+    
+    <body class="is-preload homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<header id="header" class="container">
+
+						<!-- Logo -->
+							<div id="logo">
+								<div class="image"><img src="{% static 'images/logo_white.png' %}"></div>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									<li class="current"><a href="index.html">Strona główna</a></li>
+                                    <li><a href="left-sidebar.html">Aktualności</a></li>
+                                    <li>
+										<a href="#">Koło</a>
+										<ul>
+											<li><a href="#">Zarząd</a></li>
+											<li><a href="#">Jak zostać Kołowiczem</a></li>
+											<li><a href="#">Historia Koła</a></li>
+											<li>
+												<a href="#">Tradycje Koła</a>
+												<ul>
+													<li><a href="#">Lorem ipsum dolor</a></li>
+													<li><a href="#">Phasellus consequat</a></li>
+													<li><a href="#">Magna phasellus</a></li>
+													<li><a href="#">Etiam dolore nisl</a></li>
+												</ul>
+											</li>
+											<li><a href="#">Dokumenty Koła</a></li>
+										</ul>
+									</li>
+									<li><a href="right-sidebar.html">Biblioteka</a></li>
+									<li><a href="no-sidebar.html">Kontakt</a></li>
+								</ul>
+							</nav>
+
+					</header>
+				</div>
+
+			<!-- Main -->
+			{% block content %}
+			{% endblock %}
+
+			<!-- Footer -->
+				<div id="footer-wrapper">
+					<footer id="footer" class="container">
+						<div class="row">
+							<div class="col-10 col-6-medium col-12-small">
+
+								<!-- Contact -->
+									<section class="widget contact last">
+										<h3>Kontakt</h3>
+										<ul>
+											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="#" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+											<li><a href="#" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										</ul>
+										<p>Koło Matematyków Studentów Uniwersytetu Jagiellońskiego im. prof. Stanisława Zaremby <br/>
+											Łojasiewicza 6/1008, 30-348 Kraków<br/>
+											telefon: (+48) 12 664 76 08 <br/>
+											email: kmsuj7@gmail.com
+										</p>
+									</section>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div id="copyright">
+									<ul class="menu">
+										<li>&copy; KMS UJ. All rights reserved</li><li>Original design: <a href="http://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</div>
+
+			</div>
+
+		<!-- Scripts -->
+        <script src="{% static 'dist/bundle.js' %}"></script>
+
+
+	</body>
 </html>

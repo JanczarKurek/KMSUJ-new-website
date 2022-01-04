@@ -9,6 +9,7 @@
         "moduleResolution": "node",
         "target": "es5",
         "allowJs": true,
+        "allowSyntheticDefaultImports": true,
     },
     "include": [
         "./frontend/src/**/*"

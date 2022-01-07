@@ -31,12 +31,15 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li class="current"><a href="index.html">Strona główna</a></li>
+									<li class="current"><a href="{% url 'index' %}">Strona główna</a></li>
                                     <li><a href="left-sidebar.html">Aktualności</a></li>
                                     <li>
 										<a href="#">Koło</a>
 										<ul>
-											<li><a href="#">Zarząd</a></li>
+											{% for p in pages %}
+												<li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
+											{% endfor %}
+											<!-- <li><a href="#">Zarząd</a></li>
 											<li><a href="#">Jak zostać Kołowiczem</a></li>
 											<li><a href="#">Historia Koła</a></li>
 											<li>
@@ -48,7 +51,10 @@
 													<li><a href="#">Etiam dolore nisl</a></li>
 												</ul>
 											</li>
-											<li><a href="#">Dokumenty Koła</a></li>
+											<li><a href="#">Dokumenty Koła</a></li> -->
+											{% if request.user.is_superuser %}
+											<li><a href="{% url 'page_add' %}">Dodaj stronę</a></li>
+											{% endif %}
 										</ul>
 									</li>
 									<li><a href="right-sidebar.html">Biblioteka</a></li>

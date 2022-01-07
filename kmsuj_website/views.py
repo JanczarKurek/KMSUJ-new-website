@@ -12,7 +12,7 @@ from django_bleach.utils import get_bleach_default_options
 def get_context(request):
     context = {}
 
-    pages = Page.objects.all()
+    pages = Page.objects.exclude(name="kontakt").all()
 
     context['pages'] = pages
 

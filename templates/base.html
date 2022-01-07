@@ -25,40 +25,26 @@
 
 						<!-- Logo -->
 							<div id="logo">
-								<div class="image"><img src="{% static 'images/logo_white.png' %}"></div>
+								<a href="{% url 'index' %}" class="image"><img src="{% static 'images/logo_white.png' %}"></a>
 							</div>
 
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
 									<li class="current"><a href="{% url 'index' %}">Strona główna</a></li>
-                                    <li><a href="left-sidebar.html">Aktualności</a></li>
                                     <li>
 										<a href="#">Koło</a>
 										<ul>
 											{% for p in pages %}
 												<li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
 											{% endfor %}
-											<!-- <li><a href="#">Zarząd</a></li>
-											<li><a href="#">Jak zostać Kołowiczem</a></li>
-											<li><a href="#">Historia Koła</a></li>
-											<li>
-												<a href="#">Tradycje Koła</a>
-												<ul>
-													<li><a href="#">Lorem ipsum dolor</a></li>
-													<li><a href="#">Phasellus consequat</a></li>
-													<li><a href="#">Magna phasellus</a></li>
-													<li><a href="#">Etiam dolore nisl</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Dokumenty Koła</a></li> -->
 											{% if request.user.is_superuser %}
 											<li><a href="{% url 'page_add' %}">Dodaj stronę</a></li>
 											{% endif %}
 										</ul>
 									</li>
-									<li><a href="right-sidebar.html">Biblioteka</a></li>
-									<li><a href="no-sidebar.html">Kontakt</a></li>
+									<li><a href="http://kmsuj.im.uj.edu.pl/biblioteka/katalog.php">Biblioteka</a></li>
+									<li><a href="{% url 'page' 'kontakt' %}">Kontakt</a></li>
 								</ul>
 							</nav>
 
@@ -79,10 +65,10 @@
 									<section class="widget contact last">
 										<h3>Kontakt</h3>
 										<ul>
-											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="#" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-											<li><a href="#" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+											<li><a href="https://www.facebook.com/kmsuj/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+											<li><a href="https://www.instagram.com/kms_uj/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="https://discord.gg/vbCrr4V" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+											<li><a href="https://www.linkedin.com/company/kmsuj/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
 										</ul>
 										<p>Koło Matematyków Studentów Uniwersytetu Jagiellońskiego im. prof. Stanisława Zaremby <br/>
 											Łojasiewicza 6/1008, 30-348 Kraków<br/>

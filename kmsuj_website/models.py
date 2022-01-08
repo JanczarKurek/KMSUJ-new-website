@@ -5,6 +5,7 @@ class Page(models.Model):
     title = models.CharField(max_length=50, null=True, blank=True)
     content = models.TextField(max_length=100000, blank=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    category = models.CharField(default="none", max_length=20, null=False, blank=False)
 
     def __str__(self):
         return '{} "{}"'.format(self.name, self.title)

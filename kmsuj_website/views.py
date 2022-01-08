@@ -12,9 +12,14 @@ from django_bleach.utils import get_bleach_default_options
 def get_context(request):
     context = {}
 
-    pages = Page.objects.exclude(name="kontakt").all()
+    main_pages = Page.objects.filter(category="main").order_by('order').all()
+    sub_pages = Page.objects.filter(category="traditions").order_by('order').all()
 
-    context['pages'] = pages
+    if Page.objects.filter(name="kontakt").all().count() > 0:
+        context['kontakt'] = True
+    
+    context['main_pages'] = main_pages
+    context['sub_pages'] = sub_pages
 
     return context
 
@@ -37,11 +42,14 @@ def page_view(request, name):
     bleach_args = get_bleach_default_options().copy()
     page_content = mark_safe(bleach.clean(page.content, **bleach_args))
 
+    if name == 'kontakt':
+        context['is_contact'] = True
 
     context['title'] = title
     context['page'] = page
     context['can_edit'] = can_edit
     context['page_content'] = page_content
+    context['is_index'] = False
 
     return render(request, 'simple_page.html', context)
 

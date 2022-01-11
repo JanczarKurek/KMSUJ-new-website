@@ -25,30 +25,6 @@
             noOpenerFade: true,
             speed: 300
         });
-        // $('#nav > ul').dropotron();
-		// $('#nav > ul').dropotron({
-        //         selectorParent:		$('#nav'),		// Parent jQuery object
-        //         baseZIndex:			1000,		// Base Z-Index
-        //         menuClass:			'dropotron',// Menu class (assigned to every <ul>)
-        //         expandMode:			'hover',	// Expansion mode ("hover" or "click")
-        //         hoverDelay:			150,		// Hover delay (in ms)
-        //         hideDelay:			250,		// Hide delay (in ms; 0 disables)
-        //         openerClass:		'opener',	// Opener class
-        //         openerActiveClass:	'active',	// Active opener class
-        //         submenuClassPrefix:	'level-',	// Submenu class prefix
-        //         mode:				'fade',		// Menu mode ("instant", "fade", "slide", "zoom")
-        //         speed:				'fast',		// Menu speed ("fast", "slow", or ms)
-        //         easing:				'swing',	// Easing mode ("swing", "linear")
-        //         alignment:			'left',		// Alignment ("left", "center", "right")
-        //         offsetX:			0,			// Submenu offset X
-        //         offsetY:			0,			// Submenu offset Y
-        //         globalOffsetY:		0,			// Global offset Y
-        //         IEOffsetX:			0,			// IE Offset X
-        //         IEOffsetY:			0,			// IE Offset Y
-        //         noOpenerFade:		true,		// If true and mode = "fade", prevents top-level opener fade.
-        //         detach:				true,		// Detach second level menus (prevents parent style bleed).
-        //         cloneOnDetach:		true		// If true and detach = true, leave original menu intact.
-        // });
 
 	// Nav.
 

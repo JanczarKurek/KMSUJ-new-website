@@ -27,7 +27,7 @@ cd "$WEBSITE_DIR" || fail "Could not open working directory."
 python3 manage.py collectstatic
 python3 manage.py runserver 8080 &
 
-trap "kill $(jobs -p) exit 0" EXIT
+trap "kill $(jobs -p)" EXIT
 
 /docker-entrypoint.sh
 nginx -g "daemon off;"

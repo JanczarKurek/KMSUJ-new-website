@@ -7,7 +7,7 @@ ENV WEBSITE_DIR="/website"
 
 # Install additional packages
 RUN apt update; \
-    apt install -y python3 python3-pip;
+    apt install -y python3 python3-pip npm;
 
 ADD . $WEBSITE_DIR
 ADD nginx.conf /etc/nginx/nginx.conf

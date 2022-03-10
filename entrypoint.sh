@@ -24,6 +24,9 @@ export DJANGO_LOGGING_ROOT
 info "Working under directory $WEBSITE_DIR"
 cd "$WEBSITE_DIR" || fail "Could not open working directory."
 
+npm rebuild node-sass
+npm run build
+npm install
 python3 manage.py collectstatic
 python3 manage.py runserver 8080 &
 

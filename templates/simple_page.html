@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="main-wrapper">
+        <div class="container">
+            <div class="row gtr-200">
+                <div class="col-12 col-12-medium imp-medium">
+
+                    <!-- Content -->
+                        <div id="content">
+                            <section class="last">
+                                {% if can_edit %}
+                                    <h2> <a href="{% url 'page_edit' page.name %}">{{ page.title }} </a></h2>
+                                {% else %}
+                                    <h2>{{ page.title }}</h2>
+                                {% endif %}
+
+                                {{ page_content }}
+
+                            </section>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

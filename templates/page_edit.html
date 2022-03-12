@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div id="main-wrapper">
+        <div class="container">
+            <div class="row gtr-200">
+                <div class="col-12 col-12-medium imp-medium">
+
+                    <!-- Content -->
+                        <div id="content">
+                            <section class="last">
+                                {% if title %}
+                                    <h2> {{ title }} </h2>
+                                {% endif %}
+
+                                <div role="tabpanel">
+                                    {% crispy form %}
+                                  </div>
+                            </section>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

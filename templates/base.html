@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <!--
+	Verti by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+    -->
+    <head>
+        {% if is_index %}
+		<title>{{ title }}</title>
+        {% else %}
+		<title>KMS UJ - {{ title }}</title>
+		{% endif %}
+		<link href="{% static 'dist/main.css' %}" rel="stylesheet">
+        <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    </head>
+
+    
+    <body class="is-preload homepage">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<header id="header" class="container">
+
+						<!-- Logo -->
+							<div id="logo">
+								<a href="{% url 'index' %}" class="image"><img src="{% static 'images/logo_white.png' %}"></a>
+							</div>
+
+						<!-- Nav -->
+							<nav id="nav">
+								<ul>
+									{% if is_index %}
+									<li class="current"><a href="{% url 'index' %}">Strona główna</a></li>
+									{% else %}
+									<li><a href="{% url 'index' %}">Strona główna</a></li>
+									{% endif %}
+                                    {% if not is_index and not is_contact %}
+									<li class="current">
+									{% else %}
+									<li>
+									{% endif %}
+										<a href="#">Koło</a>
+										<ul>
+											{% for p in main_pages %}
+												<li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
+											{% endfor %}
+											<li>
+												<a href="#">Tradycje Koła</a>
+												<ul>
+													{% for p in sub_pages %}
+														<li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
+													{% endfor %}
+												</ul>
+											</li>
+											{% if request.user.is_superuser %}
+											<li><a href="{% url 'page_add' %}">Dodaj stronę</a></li>
+											{% endif %}
+										</ul>
+									</li>
+									<li><a href="http://kmsuj.im.uj.edu.pl/biblioteka/katalog.php">Biblioteka</a></li>
+									{% if kontakt %}
+										{% if is_contact %}
+										<li class="current">
+										{% else %}
+										<li>
+										{% endif %}
+										<a href="{% url 'page' 'kontakt' %}">Kontakt</a></li>
+									{% endif %}
+								</ul>
+							</nav>
+
+					</header>
+				</div>
+
+			<!-- Main -->
+			{% block content %}
+			{% endblock %}
+
+			<!-- Footer -->
+				<div id="footer-wrapper">
+					<footer id="footer" class="container">
+						<div class="row">
+							<div class="col-10 col-6-medium col-12-small">
+
+								<!-- Contact -->
+									<section class="widget contact last">
+										<h3>Kontakt</h3>
+										<ul>
+											<li><a href="https://www.facebook.com/kmsuj/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+											<li><a href="https://www.instagram.com/kms_uj/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="https://discord.gg/vbCrr4V" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+											<li><a href="https://www.linkedin.com/company/kmsuj/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										</ul>
+										<p>Koło Matematyków Studentów Uniwersytetu Jagiellońskiego im. prof. Stanisława Zaremby <br/>
+											Łojasiewicza 6/1008, 30-348 Kraków<br/>
+											telefon: (+48) 12 664 76 08 <br/>
+											email: kmsuj7@gmail.com
+										</p>
+									</section>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<div id="copyright">
+									<ul class="menu">
+										<li>&copy; KMS UJ. All rights reserved</li><li>Original design: <a href="http://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</footer>
+				</div>
+
+			</div>
+
+		<!-- Scripts -->
+        <script src="{% static 'dist/bundle.js' %}"></script>
+
+
+	</body>
+</html>

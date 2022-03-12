@@ -21,6 +21,6 @@ EXPOSE 80/tcp
 
 ENV DJANGO_LOGGING_ROOT="/var/log"
 
-VOLUME /var/log /static /db
+VOLUME /var/log /static /db /certs
 
 ENTRYPOINT ["/bin/bash", "/website/entrypoint.sh"]

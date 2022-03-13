@@ -11,7 +11,15 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-import os
+import sys
+
+def _get_secret():
+    SECRET_PATH = Path("/secret")
+    if not SECRET_PATH.exists():
+        print("WARNING, using unsecure key!", file=sys.stderr)
+        return 'django-insecure-a(^dwp%kd9m__b&$borsh##d8ghhi^t=&yj5g_!y4s+gg(cn_6'
+    with open(SECRET_PATH, 'r') as secret_file:
+        return secret_file.read().strip()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a(^dwp%kd9m__b&$borsh##d8ghhi^t=&yj5g_!y4s+gg(cn_6'
+SECRET_KEY = _get_secret()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

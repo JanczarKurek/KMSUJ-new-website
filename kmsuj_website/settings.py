@@ -101,10 +101,12 @@ WSGI_APPLICATION = 'kmsuj_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+DATABASE_ROOT = os.environ["DATABASE_ROOT_DIR"]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/db/db.sqlite3',
+        'NAME': os.path.join(DATABASE_ROOT, 'db.sqlite3'),
     }
 }
 

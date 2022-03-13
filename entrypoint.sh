@@ -19,7 +19,9 @@ function fail {
 
 WEBSITE_DIR="${WEBSITE_DIR:=$(dirname $0)}"
 DJANGO_LOGGING_ROOT="${DJANGO_LOGGING_ROOT:=${WEBSITE_DIR}}"
+DATABASE_ROOT_DIR="${DATABASE_ROOT_DIR:=${WEBSITE_DIR}}"
 export DJANGO_LOGGING_ROOT
+export DATABASE_ROOT_DIR
 
 info "Working under directory $WEBSITE_DIR"
 cd "$WEBSITE_DIR" || fail "Could not open working directory."

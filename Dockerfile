@@ -20,6 +20,7 @@ RUN  pip3 install -r $WEBSITE_DIR/requirements.txt
 EXPOSE 80/tcp
 
 ENV DJANGO_LOGGING_ROOT="/var/log"
+ENV DATABASE_ROOT_DIR="/db"
 
 VOLUME /var/log /static /db /certs
 

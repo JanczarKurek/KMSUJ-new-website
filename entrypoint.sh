@@ -31,6 +31,8 @@ npm run build
 npm install
 python3 manage.py collectstatic
 python3 manage.py migrate
+echo "Running some additional configurations..."
+python3 manage.py shell -c 'from create_admin import *'
 python3 manage.py runserver 8080 &
 
 trap "kill $(jobs -p)" EXIT

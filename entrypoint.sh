@@ -38,8 +38,8 @@ echo "Generated config file at $SETTINGS_FILE"
 cat "$SETTINGS_FILE"
 
 npm rebuild node-sass
-npm run build
 npm install
+npm run build
 
 python3 manage.py collectstatic
 python3 manage.py migrate

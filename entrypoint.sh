@@ -30,6 +30,7 @@ npm rebuild node-sass
 npm run build
 npm install
 python3 manage.py collectstatic
+python3 manage.py migrate
 python3 manage.py runserver 8080 &
 
 trap "kill $(jobs -p)" EXIT

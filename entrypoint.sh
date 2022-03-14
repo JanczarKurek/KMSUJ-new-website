@@ -26,13 +26,30 @@ export DATABASE_ROOT_DIR
 info "Working under directory $WEBSITE_DIR"
 cd "$WEBSITE_DIR" || fail "Could not open working directory."
 
+# Generate deploy-specific config
+SETTINGS_FILE="kmsuj_website/generated_settings.py"
+
+echo "CSRF_COOKIE_SECURE = True" >> "$SETTINGS_FILE" 
+echo "DEBUG = False" >> "$SETTINGS_FILE"
+echo "SESSION_COOKIE_SECURE = True" >> "$SETTINGS_FILE"
+echo "SECURE_SSL_REDIRECTS = True" >> "$SETTINGS_FILE"
+
+echo "Generated config file at $SETTINGS_FILE"
+cat "$SETTINGS_FILE"
+
 npm rebuild node-sass
 npm run build
 npm install
+
 python3 manage.py collectstatic
 python3 manage.py migrate
+
 echo "Running some additional configurations..."
 python3 manage.py shell -c 'from create_admin import *'
+
+echo "Last checks whether everything looks ok"
+python3 manage.py check --deploy
+
 python3 manage.py runserver 8080 &
 
 trap "kill $(jobs -p)" EXIT

@@ -34,7 +34,12 @@ SECRET_KEY = _get_secret()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# Allow only local users to communicate with django
+# Really just nginx needs to talk to this bad boy
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+]
 
 LOGGING_ROOT = os.environ['DJANGO_LOGGING_ROOT']
 
@@ -247,4 +252,5 @@ TINYMCE_DEFAULT_CONFIG_WITH_IMAGES = {  # Additional settings for editors where 
     'file_picker_types': 'image',
     'file_picker_callback': 'tinymce_local_file_picker',
 }
+
 from kmsuj_website.generated_settings import *

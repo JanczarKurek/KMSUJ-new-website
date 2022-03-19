@@ -17,9 +17,6 @@ class AdditionalLink:
         self.link = l
         self.title = t
 
-def replace_polish_characters(text):
-
-
 def get_context(request, site='KMSUJ'):
     context = {}
 

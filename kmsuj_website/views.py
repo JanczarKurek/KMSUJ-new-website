@@ -9,17 +9,42 @@ from .models import Page
 import bleach
 from django_bleach.utils import get_bleach_default_options
 
-def get_context(request):
+class AdditionalLink:
+    def __init__(self):
+        self.link = ''
+        self.title = ''
+    def __init__(self, l, t):
+        self.link = l
+        self.title = t
+
+def get_context(request, site='KMSUJ'):
     context = {}
 
-    main_pages = Page.objects.filter(category="main").order_by('order').all()
-    sub_pages = Page.objects.filter(category="traditions").order_by('order').all()
+    main_pages = Page.objects.filter(site=site, category="main").order_by('order').all()
+    additional_links = []
+    header_footer_colors = 'header-footer-colors-' + site
+    print(header_footer_colors)
+    if(site == 'KMSUJ'):
+        sub_pages = Page.objects.filter(site=site, category="traditions").order_by('order').all()
+        context['sub_pages'] = sub_pages
+        main_nav_tab = 'Koło'
+        prefix = ''
+        additional_links.append(AdditionalLink("http://kmsuj.im.uj.edu.pl/biblioteka/katalog.php", "Biblioteka"))
+        
+    else:
+        prefix = site + '/'
+    if(site == 'OSSM'):
+        main_nav_tab = 'Informacje'
 
-    if Page.objects.filter(name="kontakt").all().count() > 0:
+    if Page.objects.filter(site=site, name="kontakt").all().count() > 0 or Page.objects.filter(site=site, name="kontakt_o").all().count() > 0:
         context['kontakt'] = True
     
     context['main_pages'] = main_pages
-    context['sub_pages'] = sub_pages
+    context['site'] = site
+    context['main_nav_tab'] = main_nav_tab
+    context['prefix'] = prefix
+    context['additional_links'] = additional_links
+    context['header_footer_colors'] = header_footer_colors
 
     return context
 
@@ -33,8 +58,18 @@ def index_view(request):
 
     return render(request, 'index.html', context)
 
-def page_view(request, name):
-    context = get_context(request)
+def ossm_index_view(request):
+    context = get_context(request, "OSSM")
+    title = "OSSM"
+    is_index = True
+
+    context['title'] = title
+    context['is_index'] = is_index
+
+    return render(request, 'ossm_index.html', context)
+
+def page_view_base(request, site, name):
+    context = get_context(request, site)
     page = get_object_or_404(Page,name=name)
     title = page.title
     can_edit = request.user.is_superuser
@@ -42,7 +77,7 @@ def page_view(request, name):
     bleach_args = get_bleach_default_options().copy()
     page_content = mark_safe(bleach.clean(page.content, **bleach_args))
 
-    if name == 'kontakt':
+    if name.startswith('kontakt'):
         context['is_contact'] = True
 
     context['title'] = title
@@ -51,17 +86,25 @@ def page_view(request, name):
     context['page_content'] = page_content
     context['is_index'] = False
 
+    return context
+
+def page_view(request, name):
+    context = page_view_base(request, "KMSUJ", name)
     return render(request, 'simple_page.html', context)
 
-def page_edit_view(request, name=None):
-    context = get_context(request)    
+def ossm_page_view(request, name):
+    context = page_view_base(request, "OSSM", name)
+    return render(request, 'ossm_simple_page.html', context)
+
+def page_edit_view_base(request, site, name=None):
+    context = get_context(request, site)    
     new = (name is None)
     if new:
         page = None
         title = 'Nowa podstrona'
         has_permissions = request.user.is_superuser
     else :
-        page = get_object_or_404(Page, name=name)
+        page = get_object_or_404(Page,name=name)
         title = page.title
         has_permissions = request.user.is_superuser
     
@@ -74,25 +117,42 @@ def page_edit_view(request, name=None):
         if request.POST.get('delete'):
             print("Deleting ...")
             Page.objects.filter(name=name).delete()
-            return redirect('index')
+            if site == 'OSSM':
+                return redirect('ossm_index')
+            else:
+                return redirect('index')
 
         if form.is_valid():
             new_page = form.save(commit=False)
-            new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower()
+            if site == 'OSSM':
+                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower()+'_o'
+            else:
+                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower()
             new_page.save()
             form.save_m2m()
             messages.info(request, 'Zapisano.', extra_tags='auto-dismiss')
-            return redirect('page', form.instance.name)
+            if site == 'OSSM':
+                return redirect('ossm_page', form.instance.name)
+            else:
+                return redirect('page', form.instance.name)   
     else:
         form = PageForm(request.user, instance=page)
 
     context['title'] = title
     context['page'] = page
     context['form'] = form
+    if site == 'OSSM':
+        return render(request, 'ossm_page_edit.html', context)
+    else:
+        return render(request, 'page_edit.html', context)
 
-    return render(request, 'page_edit.html', context)
 
-def page_delete_view(request, name=None):
+def page_edit_view(request, name=None):
+    return page_edit_view_base(request, 'KMSUJ', name)
+def ossm_page_edit_view(request, name=None):
+    return page_edit_view_base(request, 'OSSM', name)
+
+def page_delete_view_base(request, site, name=None):
 
     has_permissions = request.user.is_superuser
 
@@ -101,5 +161,13 @@ def page_delete_view(request, name=None):
 
     if request.method == 'DELETE':
         print(request)
+    if site =='OSSM':
+        return redirect('ossm_index')
+    else:
+        return redirect('index')
 
-    return redirect('index')
+def page_delete_view(request, name=None):
+    return page_delete_view_base(request, "KMSUJ", name)
+
+def ossm_page_delete_view(request, name=None):
+    return page_delete_view_base(request,"OSSM", name)

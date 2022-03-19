@@ -17,12 +17,13 @@ class PageForm(ModelForm):
 
     class Meta:
         model = Page
-        fields = ['title', 'category', 'order', 'content']
+        fields = ['title', 'site', 'category', 'order', 'content']
         labels = {
             'title': 'Tytuł',
             'content': 'Treść',
             'category' : 'Kategoria',
             'order' : 'Kolejność',
+            'site' : 'Strona'
         }
 
     def __init__(self, user, *args, **kwargs):
@@ -35,6 +36,7 @@ class PageForm(ModelForm):
 
         layout = []
         layout.append('title')
+        layout.append('site')
         layout.append('category')
         layout.append('order')
         layout.append('content')

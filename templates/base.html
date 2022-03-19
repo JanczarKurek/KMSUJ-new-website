@@ -11,7 +11,7 @@
         {% if is_index %}
 		<title>{{ title }}</title>
         {% else %}
-		<title>KMS UJ - {{ title }}</title>
+		<title>{{ site }} - {{ title }}</title>
 		{% endif %}
 		<link href="{% static 'dist/main.css' %}" rel="stylesheet">
         <meta charset="utf-8" />
@@ -24,53 +24,43 @@
 		<div id="page-wrapper">
 
 			<!-- Header -->
-				<div id="header-wrapper">
+				<div id="header-wrapper" class="{{ header_footer_colors }}">
 					<header id="header" class="container">
 
 						<!-- Logo -->
 							<div id="logo">
-								<a href="{% url 'index' %}" class="image"><img src="{% static 'images/logo_white.png' %}"></a>
+								{% block logo %} {% endblock %}
 							</div>
 
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
 									{% if is_index %}
-									<li class="current"><a href="{% url 'index' %}">Strona główna</a></li>
+										<li class="current">
 									{% else %}
-									<li><a href="{% url 'index' %}">Strona główna</a></li>
+										<li>
 									{% endif %}
+										{% block index_link %}{% endblock %}</li>
                                     {% if not is_index and not is_contact %}
 									<li class="current">
 									{% else %}
 									<li>
 									{% endif %}
-										<a href="#">Koło</a>
+										<a href="#">{{ main_nav_tab }}</a>
 										<ul>
-											{% for p in main_pages %}
-												<li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
-											{% endfor %}
-											<li>
-												<a href="#">Tradycje Koła</a>
-												<ul>
-													{% for p in sub_pages %}
-														<li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
-													{% endfor %}
-												</ul>
-											</li>
-											{% if request.user.is_superuser %}
-											<li><a href="{% url 'page_add' %}">Dodaj stronę</a></li>
-											{% endif %}
+											{% block pages %}{% endblock %}
 										</ul>
 									</li>
-									<li><a href="http://kmsuj.im.uj.edu.pl/biblioteka/katalog.php">Biblioteka</a></li>
+									{% for link in additional_links %}
+										<li><a href="{{ link.link }}">{{ link.title }}</a></li>
+									{% endfor %}
 									{% if kontakt %}
 										{% if is_contact %}
 										<li class="current">
 										{% else %}
 										<li>
 										{% endif %}
-										<a href="{% url 'page' 'kontakt' %}">Kontakt</a></li>
+										{% block contact_link %}{% endblock %}</li>
 									{% endif %}
 								</ul>
 							</nav>
@@ -83,26 +73,13 @@
 			{% endblock %}
 
 			<!-- Footer -->
-				<div id="footer-wrapper">
+				<div id="footer-wrapper"  class="{{ header_footer_colors }}">
 					<footer id="footer" class="container">
 						<div class="row">
 							<div class="col-10 col-6-medium col-12-small">
 
 								<!-- Contact -->
-									<section class="widget contact last">
-										<h3>Kontakt</h3>
-										<ul>
-											<li><a href="https://www.facebook.com/kmsuj/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-											<li><a href="https://www.instagram.com/kms_uj/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-											<li><a href="https://discord.gg/vbCrr4V" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
-											<li><a href="https://www.linkedin.com/company/kmsuj/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-										</ul>
-										<p>Koło Matematyków Studentów Uniwersytetu Jagiellońskiego im. prof. Stanisława Zaremby <br/>
-											Łojasiewicza 6/1008, 30-348 Kraków<br/>
-											telefon: (+48) 12 664 76 08 <br/>
-											email: kmsuj@uj.edu.pl
-										</p>
-									</section>
+									{% block bottom %} {% endblock %}
 
 							</div>
 						</div>

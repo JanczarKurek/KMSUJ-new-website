@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block logo %}
+    <a href="{% url 'ossm_index' %}" class="image"><img src="{% static 'images/logo.png' %}"></a>
+{% endblock %}
+
+{% block index_link %}<a href="{% url 'ossm_index' %}">Strona główna</a>{% endblock %}
+{% block contact_link %}<a href="{% url 'ossm_page' 'kontakt_o' %}">Kontakt</a>{% endblock %}
+
+{% block pages %}
+    {% for p in main_pages %}
+    <li><a href="{% url 'ossm_page' p.name %}">{{ p.title }}</a></li>
+    {% endfor %}
+    <li>
+    </li>
+    {% if request.user.is_superuser %}
+    <li><a href="{% url 'ossm_page_add' %}">Dodaj stronę</a></li>
+    {% endif %}
+{% endblock %}

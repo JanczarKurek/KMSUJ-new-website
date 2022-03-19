@@ -17,7 +17,7 @@
 /* Color variables */
 $UJ-blue: #005ca7;
 $header-footer-color: #062e4e;
-$header-footer-color-ossm: #ee9622;
+$header-footer-color-ossm: #490808;
 $tab-chosen-color: rgba(255, 255, 255, 0.212);
 $light-text-color: #fff;
 $dark-text-color: #000;
@@ -806,6 +806,10 @@ $light-background: #fff;
 			}
 		}
 	}
+	// img {
+	// 	width: auto;
+	// }
+	  
 
 	.dropotron {
 		background: #fff;
@@ -873,9 +877,12 @@ $light-background: #fff;
 		position: relative;
 		h2 {
 			line-height: 1.5em;
-			font-size: 3em;
+			font-size: 2.75em;
 			margin: 0.5em 0 0.35em 0;
 			text-align:center;
+			span {
+				color: red;
+			}
 		}
 
 		p {
@@ -1420,7 +1427,6 @@ $light-background: #fff;
 			#banner {
 				text-align: center;
 				margin: 0 auto !important;
-
 				h2 {
 					font-size: 2em;
 					margin: 0.75em 0 0.5em 0;
@@ -1475,4 +1481,8 @@ $light-background: #fff;
 }
 .header-footer-colors-KMSUJ {
 	background-color: $header-footer-color;
+}
+.resizable {
+	max-width: 100%;
+    height: auto;
 }

@@ -17,6 +17,9 @@ class AdditionalLink:
         self.link = l
         self.title = t
 
+def replace_polish_characters(text):
+
+
 def get_context(request, site='KMSUJ'):
     context = {}
 
@@ -125,9 +128,9 @@ def page_edit_view_base(request, site, name=None):
         if form.is_valid():
             new_page = form.save(commit=False)
             if site == 'OSSM':
-                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower()+'_o'
+                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')+'_o'
             else:
-                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower()
+                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')
             new_page.save()
             form.save_m2m()
             messages.info(request, 'Zapisano.', extra_tags='auto-dismiss')

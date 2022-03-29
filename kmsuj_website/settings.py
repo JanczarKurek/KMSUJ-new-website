@@ -185,7 +185,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 BLEACH_ALLOWED_TAGS = [
     'p', 'b', 'i', 'u', 'em', 'strong', 'a', 'pre', 'div', 'strong', 'sup', 'sub', 'ol', 'ul', 'li', 'address',
     'span', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code', 'table', 'tbody', 'tr', 'td', 'hr', 'img',
-    'br',
+    'br', 'iframe',
 ]
 
 # Which HTML attributes are allowed

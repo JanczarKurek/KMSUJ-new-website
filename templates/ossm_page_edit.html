@@ -1,4 +1,7 @@
-{% extends "base_kmsuj.html" %}
+{% extends "base_ossm.html" %}
+
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <div id="main-wrapper">
@@ -9,14 +12,13 @@
                     <!-- Content -->
                         <div id="content">
                             <section class="last">
-                                {% if can_edit %}
-                                    <h2> <a href="{% url 'page_edit' page.name %}">{{ page.title }} </a></h2>
-                                {% else %}
-                                    <h2>{{ page.title }}</h2>
+                                {% if title %}
+                                    <h2> {{ title }} </h2>
                                 {% endif %}
 
-                                {{ page_content }}
-
+                                <div role="tabpanel">
+                                    {% crispy form %}
+                                  </div>
                             </section>
                         </div>
 
@@ -24,4 +26,5 @@
             </div>
         </div>
     </div>
+    
 {% endblock %}

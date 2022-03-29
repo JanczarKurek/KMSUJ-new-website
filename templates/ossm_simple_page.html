@@ -1,4 +1,4 @@
-{% extends "base_kmsuj.html" %}
+{% extends "base_ossm.html" %}
 
 {% block content %}
     <div id="main-wrapper">
@@ -10,7 +10,7 @@
                         <div id="content">
                             <section class="last">
                                 {% if can_edit %}
-                                    <h2> <a href="{% url 'page_edit' page.name %}">{{ page.title }} </a></h2>
+                                    <h2> <a href="{% url 'ossm_page_edit' page.name %}">{{ page.title }} </a></h2>
                                 {% else %}
                                     <h2>{{ page.title }}</h2>
                                 {% endif %}

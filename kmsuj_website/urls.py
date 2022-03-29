@@ -22,9 +22,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_view, name='index'),
-    path('<str:name>/', views.page_view, name='page'),
+    path('ossm/', views.ossm_index_view, name='ossm_index'),
+    path('<str:name>/', views.page_view,name='page'),
     path('page/addPage/', views.page_edit_view, name='page_add'),
     path('page/<str:name>/edit/', views.page_edit_view, name='page_edit'),
-    path('page/<str:name>/delete/', views.page_delete_view, name='page_delete'),
+    path('page/<str:name>/delete/', views.page_delete_view,name='page_delete'),
+    path('ossm/<str:name>/', views.ossm_page_view, name='ossm_page'),
+    path('ossm/page/addPage/', views.ossm_page_edit_view, name='ossm_page_add'),
+    path('ossm/page/<str:name>/edit/', views.ossm_page_edit_view,  name='ossm_page_edit'),
+    path('ossm/page/<str:name>/delete/', views.ossm_page_delete_view, name='ossm_page_delete'),
     path(r'^tinymce/', include('tinymce.urls')),
 ]

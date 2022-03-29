@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block logo %}
+    <a href="{% url 'index' %}" class="image"><img src="{% static 'images/logo_white.png' %}"></a>
+{% endblock %}
+
+{% block index_link %}<a href="{% url 'index' %}">Strona główna</a>{% endblock %}
+{% block contact_link %}<a href="{% url 'page' 'kontakt' %}">Kontakt</a>{% endblock %}
+
+{% block pages %}
+    {% for p in main_pages %}
+    <li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
+    {% endfor %}
+    <li>
+    <a href="#">Tradycje Koła</a>
+    <ul>
+        {% for p in sub_pages %}
+            <li><a href="{% url 'page' p.name %}">{{ p.title }}</a></li>
+        {% endfor %}
+    </ul>
+    </li>
+    {% if request.user.is_superuser %}
+    <li><a href="{% url 'page_add' %}">Dodaj stronę</a></li>
+    {% endif %}
+{% endblock %}
+
+{% block bottom %}
+<section class="widget contact last">
+    <h3>Kontakt</h3>
+    <ul>
+        <li><a href="https://www.facebook.com/kmsuj/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+        <li><a href="https://www.instagram.com/kms_uj/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+        <li><a href="https://discord.gg/vbCrr4V" class="icon brands fa-discord"><span class="label">Discord</span></a></li>
+        <li><a href="https://www.linkedin.com/company/kmsuj/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+    </ul>
+    <p>Koło Matematyków Studentów Uniwersytetu Jagiellońskiego im. prof. Stanisława Zaremby <br/>
+        Łojasiewicza 6/1008, 30-348 Kraków<br/>
+        telefon: (+48) 12 664 76 08 <br/>
+        email: kmsuj@uj.edu.pl
+    </p>
+</section>
+{% endblock %}

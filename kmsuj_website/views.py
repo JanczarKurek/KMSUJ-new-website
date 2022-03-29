@@ -10,12 +10,9 @@ import bleach
 from django_bleach.utils import get_bleach_default_options
 
 class AdditionalLink:
-    def __init__(self):
-        self.link = ''
-        self.title = ''
-    def __init__(self, l, t):
-        self.link = l
-        self.title = t
+    def __init__(self, link = '', title = ''):
+        self.link = link
+        self.title = title
 
 def get_context(request, site='KMSUJ'):
     context = {}
@@ -36,7 +33,7 @@ def get_context(request, site='KMSUJ'):
     if(site == 'OSSM'):
         main_nav_tab = 'Informacje'
 
-    if Page.objects.filter(site=site, name="kontakt").all().count() > 0 or Page.objects.filter(site=site, name="kontakt_o").all().count() > 0:
+    if Page.objects.filter(site=site, name="kontakt").all().count() or Page.objects.filter(site=site, name="kontakt_o").all().count() :
         context['kontakt'] = True
     
     context['main_pages'] = main_pages
@@ -50,21 +47,17 @@ def get_context(request, site='KMSUJ'):
 
 def index_view(request):
     context = get_context(request)
-    title = "KMS UJ"
-    is_index = True
 
-    context['title'] = title
-    context['is_index'] = is_index
+    context['title'] = "KMS UJ"
+    context['is_index'] = True
 
     return render(request, 'index.html', context)
 
 def ossm_index_view(request):
     context = get_context(request, "OSSM")
-    title = "OSSM"
-    is_index = True
 
-    context['title'] = title
-    context['is_index'] = is_index
+    context['title'] = "OSSM"
+    context['is_index'] = True
 
     return render(request, 'ossm_index.html', context)
 
@@ -104,7 +97,7 @@ def page_edit_view_base(request, site, name=None):
         title = 'Nowa podstrona'
         has_permissions = request.user.is_superuser
     else :
-        page = get_object_or_404(Page,name=name)
+        page = get_object_or_404(Page, name=name)
         title = page.title
         has_permissions = request.user.is_superuser
     

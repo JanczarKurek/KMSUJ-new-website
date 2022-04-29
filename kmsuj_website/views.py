@@ -80,7 +80,7 @@ def ossm_index_view(request):
 
 def page_view_base(request, site, name):
     context = get_context(request, site)
-    page = get_object_or_404(Page,name=name)
+    page = get_object_or_404(Page,name=name, site=site)
     title = page.title
     can_edit = request.user.is_superuser
 
@@ -135,7 +135,7 @@ def page_edit_view_base(request, site, name=None):
         if form.is_valid():
             new_page = form.save(commit=False)
             if site == 'OSSM':
-                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')+'_o'
+                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')
             else:
                 new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')
             new_page.save()

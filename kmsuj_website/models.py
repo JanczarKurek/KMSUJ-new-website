@@ -5,7 +5,7 @@ class Page(models.Model):
         ("KMSUJ", "KMS UJ"),
         ("OSSM", "OSSM")
     }
-    name = models.SlugField(max_length=50, null=False, blank=False, unique=True)
+    name = models.SlugField(max_length=50, null=False, blank=False)
     title = models.CharField(max_length=50, null=True, blank=True)
     content = models.TextField(max_length=100000, blank=True)
     order = models.PositiveIntegerField(default=0, blank=False, null=False)
@@ -17,3 +17,6 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         super(Page, self).save(*args, **kwargs)
+    
+    class Meta:
+        unique_together = ("name", "site")

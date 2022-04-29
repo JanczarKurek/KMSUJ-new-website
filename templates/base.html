@@ -51,6 +51,7 @@
 											{% block pages %}{% endblock %}
 										</ul>
 									</li>
+									{% block dropdown_links %}{% endblock %}
 									{% for link in additional_links %}
 										<li><a href="{{ link.link }}">{{ link.title }}</a></li>
 									{% endfor %}

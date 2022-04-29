@@ -7,12 +7,26 @@ from django.utils.safestring import mark_safe
 from kmsuj_website.forms import PageForm
 from .models import Page
 import bleach
-from django_bleach.utils import get_bleach_default_options
+from bleach.css_sanitizer import CSSSanitizer
+
+from .settings import BLEACH_ALLOWED_TAGS, BLEACH_ALLOWED_ATTRIBUTES, BLEACH_ALLOWED_STYLES, BLEACH_STRIP_TAGS, BLEACH_STRIP_COMMENTS
 
 class AdditionalLink:
     def __init__(self, link = '', title = ''):
         self.link = link
         self.title = title
+
+def get_bleach_options():
+    bleach_args = {
+        "tags": BLEACH_ALLOWED_TAGS,
+        "attributes": BLEACH_ALLOWED_ATTRIBUTES,
+        "strip": BLEACH_STRIP_TAGS,
+        "strip_comments": BLEACH_STRIP_COMMENTS,
+        "css_sanitizer": CSSSanitizer(allowed_css_properties=BLEACH_ALLOWED_STYLES),
+    }
+    
+    return bleach_args
+
 
 def get_context(request, site='KMSUJ'):
     context = {}
@@ -70,7 +84,7 @@ def page_view_base(request, site, name):
     title = page.title
     can_edit = request.user.is_superuser
 
-    bleach_args = get_bleach_default_options().copy()
+    bleach_args = get_bleach_options().copy()
     page_content = mark_safe(bleach.clean(page.content, **bleach_args))
 
     if name.startswith('kontakt'):

@@ -27,6 +27,17 @@
     {% endif %}
 {% endblock %}
 
+{% block dropdown_links %}
+    <li>
+        <a href="#">Konferencje</a>
+        {% for c in dropdown_links %}
+            <ul>
+                <li><a href="{{ c.link }}">{{ c.title }}</a></li>
+            </ul>
+        {% endfor %}
+    </li>
+{% endblock %}
+
 {% block bottom %}
 <section class="widget contact last">
     <h3>Kontakt</h3>

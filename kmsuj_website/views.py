@@ -19,6 +19,7 @@ def get_context(request, site='KMSUJ'):
 
     main_pages = Page.objects.filter(site=site, category="main").order_by('order').all()
     additional_links = []
+    dropdown_links = []
     header_footer_colors = 'header-footer-colors-' + site
     print(header_footer_colors)
     if(site == 'KMSUJ'):
@@ -27,6 +28,7 @@ def get_context(request, site='KMSUJ'):
         main_nav_tab = 'Koło'
         prefix = ''
         additional_links.append(AdditionalLink("http://kmsuj.im.uj.edu.pl/biblioteka/katalog.php", "Biblioteka"))
+        dropdown_links.append(AdditionalLink("/ossm", "Ogólnopolska Sesja Studentów Matematyki"))
         
     else:
         prefix = site + '/'
@@ -42,6 +44,7 @@ def get_context(request, site='KMSUJ'):
     context['prefix'] = prefix
     context['additional_links'] = additional_links
     context['header_footer_colors'] = header_footer_colors
+    context['dropdown_links'] = dropdown_links
 
     return context
 

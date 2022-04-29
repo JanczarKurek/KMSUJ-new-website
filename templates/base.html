@@ -51,6 +51,7 @@
 											{% block pages %}{% endblock %}
 										</ul>
 									</li>
+									{% block dropdown_links %}{% endblock %}
 									{% for link in additional_links %}
 										<li><a href="{{ link.link }}">{{ link.title }}</a></li>
 									{% endfor %}
@@ -99,7 +100,8 @@
 
 		<!-- Scripts -->
         <script src="{% static 'dist/bundle.js' %}"></script>
-
-
+		<script type="text/javascript" id="MathJax-script" async
+		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+		</script>
 	</body>
 </html>

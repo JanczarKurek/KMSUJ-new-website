@@ -36,7 +36,7 @@ def get_context(request, site='KMSUJ'):
     dropdown_links = []
     header_footer_colors = 'header-footer-colors-' + site
     print(header_footer_colors)
-    if(site == 'KMSUJ'):
+    if site == 'KMSUJ':
         sub_pages = Page.objects.filter(site=site, category="traditions").order_by('order').all()
         context['sub_pages'] = sub_pages
         main_nav_tab = 'Koło'
@@ -46,7 +46,10 @@ def get_context(request, site='KMSUJ'):
         
     else:
         prefix = site + '/'
-    if(site == 'OSSM'):
+    if site == 'OSSM':
+        main_nav_tab = 'Informacje'
+
+    if site == 'WARSZTATY':
         main_nav_tab = 'Informacje'
 
     if Page.objects.filter(site=site, name="kontakt").all().count() or Page.objects.filter(site=site, name="kontakt_o").all().count() :
@@ -78,6 +81,14 @@ def ossm_index_view(request):
 
     return render(request, 'ossm_index.html', context)
 
+def warsztaty_index_view(request):
+    context = get_context(request, "WARSZTATY")
+
+    context['title'] = "Warsztaty"
+    context['is_index'] = True
+
+    return render(request, 'warsztaty_index.html', context)
+
 def page_view_base(request, site, name):
     context = get_context(request, site)
     page = get_object_or_404(Page,name=name, site=site)
@@ -106,6 +117,10 @@ def ossm_page_view(request, name):
     context = page_view_base(request, "OSSM", name)
     return render(request, 'ossm_simple_page.html', context)
 
+def warsztaty_page_view(request, name):
+    context = page_view_base(request, "WARSZTATY", name)
+    return render(request, 'warsztaty_simple_page.html', context)
+
 def page_edit_view_base(request, site, name=None):
     context = get_context(request, site)    
     new = (name is None)
@@ -129,20 +144,21 @@ def page_edit_view_base(request, site, name=None):
             Page.objects.filter(name=name).delete()
             if site == 'OSSM':
                 return redirect('ossm_index')
+            elif site == 'WARSZTATY':
+                return redirect('warsztaty_index')
             else:
                 return redirect('index')
 
         if form.is_valid():
             new_page = form.save(commit=False)
-            if site == 'OSSM':
-                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')
-            else:
-                new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')
+            new_page.name = unicodedata.normalize('NFKD', new_page.title).encode('ascii', 'ignore').decode('ascii').lower().replace(' ', '_')
             new_page.save()
             form.save_m2m()
             messages.info(request, 'Zapisano.', extra_tags='auto-dismiss')
             if site == 'OSSM':
                 return redirect('ossm_page', form.instance.name)
+            elif site == 'WARSZTATY':
+                return redirect('warsztaty_page', form.instance.name)
             else:
                 return redirect('page', form.instance.name)   
     else:
@@ -153,14 +169,20 @@ def page_edit_view_base(request, site, name=None):
     context['form'] = form
     if site == 'OSSM':
         return render(request, 'ossm_page_edit.html', context)
+    elif site == 'WARSZTATY':
+        return render(request, 'warsztaty_page_edit.html', context)
     else:
         return render(request, 'page_edit.html', context)
 
 
 def page_edit_view(request, name=None):
     return page_edit_view_base(request, 'KMSUJ', name)
+
 def ossm_page_edit_view(request, name=None):
     return page_edit_view_base(request, 'OSSM', name)
+
+def warsztaty_page_edit_view(request, name=None):
+    return page_edit_view_base(request, 'WARSZTATY', name)
 
 def page_delete_view_base(request, site, name=None):
 
@@ -171,8 +193,10 @@ def page_delete_view_base(request, site, name=None):
 
     if request.method == 'DELETE':
         print(request)
-    if site =='OSSM':
+    if site == 'OSSM':
         return redirect('ossm_index')
+    elif site == 'WARSZTATY':
+        return redirect('warsztaty_index')
     else:
         return redirect('index')
 
@@ -181,3 +205,6 @@ def page_delete_view(request, name=None):
 
 def ossm_page_delete_view(request, name=None):
     return page_delete_view_base(request,"OSSM", name)
+
+def warsztaty_page_delete_view(request, name=None):
+    return page_delete_view_base(request,"WARSZTATY", name)

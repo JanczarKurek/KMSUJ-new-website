@@ -18,6 +18,7 @@
 $UJ-blue: #005ca7;
 $header-footer-color: #062e4e;
 $header-footer-color-ossm: #490808;
+$header-footer-color-warsztaty: #115c0cc7;
 $tab-chosen-color: rgba(255, 255, 255, 0.212);
 $light-text-color: #fff;
 $dark-text-color: #000;
@@ -1481,6 +1482,9 @@ $light-background: #fff;
 }
 .header-footer-colors-KMSUJ {
 	background-color: $header-footer-color;
+}
+.header-footer-colors-WARSZTATY {
+	background-color: $header-footer-color-warsztaty;
 }
 .resizable {
 	max-width: 100%;

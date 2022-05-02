@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_view, name='index'),
     path('ossm/', views.ossm_index_view, name='ossm_index'),
+    path('warsztaty/', views.warsztaty_index_view, name='warsztaty_index'),
     path('<str:name>/', views.page_view,name='page'),
     path('page/addPage/', views.page_edit_view, name='page_add'),
     path('page/<str:name>/edit/', views.page_edit_view, name='page_edit'),
@@ -31,5 +32,9 @@ urlpatterns = [
     path('ossm/page/addPage/', views.ossm_page_edit_view, name='ossm_page_add'),
     path('ossm/page/<str:name>/edit/', views.ossm_page_edit_view,  name='ossm_page_edit'),
     path('ossm/page/<str:name>/delete/', views.ossm_page_delete_view, name='ossm_page_delete'),
+    path('warsztaty/<str:name>/', views.warsztaty_page_view, name='warsztaty_page'),
+    path('warsztaty/page/addPage/', views.warsztaty_page_edit_view, name='warsztaty_page_add'),
+    path('warsztaty/page/<str:name>/edit/', views.warsztaty_page_edit_view,  name='warsztaty_page_edit'),
+    path('warsztaty/page/<str:name>/delete/', views.warsztaty_page_delete_view, name='warsztaty_page_delete'),
     path(r'^tinymce/', include('tinymce.urls')),
 ]

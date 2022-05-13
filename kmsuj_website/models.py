@@ -4,7 +4,6 @@ class Page(models.Model):
     SITE_CHOICES = {
         ("KMSUJ", "KMS UJ"),
         ("OSSM", "OSSM"),
-        ("WARSZTATY", "WARSZTATY"),
     }
     name = models.SlugField(max_length=50, null=False, blank=False)
     title = models.CharField(max_length=50, null=True, blank=True)
@@ -21,3 +20,19 @@ class Page(models.Model):
     
     class Meta:
         unique_together = ("name", "site")
+
+class BilingualPage(models.Model):
+    name = models.SlugField(max_length=50, null=False, blank=False, unique=True)
+    title = models.CharField(max_length=50, null=True, blank=True)
+    title_polish = models.CharField(max_length=50, null=True, blank=True)
+    content = models.TextField(max_length=100000, blank=True)
+    content_polish = models.TextField(max_length=100000, blank=True)
+    order = models.PositiveIntegerField(default=0, blank=False, null=False)
+    category = models.CharField(default="none", max_length=20, null=False, blank=False)
+
+    def __str__(self):
+        return '{} "{}"'.format(self.name, self.title)
+
+    def save(self, *args, **kwargs):
+        super(BilingualPage, self).save(*args, **kwargs)
+    

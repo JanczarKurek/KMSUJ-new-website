@@ -1,0 +1,122 @@
+{% extends "base_workshop.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Banner -->
+<div id="banner-wrapper">
+    <div id="banner" class="box container">
+        <div class="row">
+            <div class="col-8 col-12-medium">
+                <div class="image"><img src="{% static 'images/warsztaty_main.png' %}" alt=""></div>
+            </div>
+            <div class="col-4 col-12-medium center">
+                <h2 style="text-align: left;">
+                    {% if language == 'pl' %}
+                    Międzynarodowe Warsztaty
+                    dla Młodych Matematyków
+                    2022
+                    {% else %}
+                    International Workshop
+                    for Young Mathematicians
+                    2022
+                    {% endif %}
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row gtr-200">
+            <div class="col-12 col-12-medium imp-medium">
+
+                <!-- Content -->
+                <div id="content">
+                    <section class="last">
+                        <!-- <h2>O Kole</h2> -->
+                        <p style="text-align: justify">
+                            {% if language == 'pl' %}
+                            Międzynarodowe Warsztaty dla Młodych Matematyków to szansa dla młodych studentów na
+                            przedstawienie wyników swoich badań. To czas dla nas, pasjonatów, którym matematyka płynie w
+                            żyłach, aby wsłuchiwać się w referaty kolegów i koleżanek, jak również zaproszonych gości,
+                            którzy lubią na takich wydarzeniach prezentować jeszcze nieopublikowane wyniki. Ale! Toż to
+                            Warsztaty! Muszą zatem pojawić się także sesje problemowe prowadzone przez naszych gości i
+                            opiekunów naukowych. Może się tam zdarzyć wszystko, na co będziecie mieli chęci. Jednego
+                            dnia czeka nas także sesja posterowa.
+                            <br><br>
+                            Naszym głównym celem jest nauka, wymiana myśli i nawiązanie kontaktów naukowych. Nie wolno
+                            jednak zapomnieć o kontaktach towarzyskich. W tym celu odbędzie się kilka wyjść
+                            integracyjnych. Z roku na rok są to inne wydarzenia, przykładowe wyjścia to kręgle, kino,
+                            zwiedzanie Krakowa, grill czy paintball, słowem – wszystko, co tylko może przyjść do głowy
+                            tegorocznym organizatorom.
+                            <br><br>
+                            Nazwa może i brzmi poważnie, nie jest to jednak powód do strachu. To wydarzenie jest dla
+                            Ciebie, od pierwszych uśmiechów na rejestracji po ostatnie dźwięki kruszącej się kredy. Nie
+                            martw się swoim angielskim, dasz radę, w razie czego będą tu inni Polacy, którzy na pewno Ci
+                            podpowiedzą. Weź ze sobą znajomych – w grupie weselej, zarówno w podróży, jak i na miejscu.
+                            Spróbuj swoich sił z referatem lub plakatem, ostatecznie jesteśmy tutaj, żeby uczyć się
+                            wzajemnie od siebie.
+                            <br><br>
+                            Zapraszamy serdecznie – będzie wspaniale. Jeśli masz pytania, zawsze możesz do nas napisać:
+                            kmsuj@uj.edu.pl.
+                            {% else %}
+                            The International Workshop for Young Mathematicians is an opportunity for young researchers,
+                            undergraduates and PhD
+                            students to give a talk presenting the results of your research. It is a time for us,
+                            students who have mathematics
+                            running through our blood, to attend our friends' lectures as well as lectures given by the
+                            invited guests, who often
+                            use events like this to share their yet unpublished findings. First and foremost however,
+                            this is a workshop event. We
+                            will have guest and supervisor led problem sessions, where anything can happen - it is all
+                            up to your personal
+                            incentives and interests. There will also be a poster session during the Workshop.
+                            <br><br>
+                            Our main objectives are learning, exchanging thoughts, and establishing new scientific
+                            connections. However, we cannot
+                            forget about our social needs, numerous bonding and icebreaking activities are planned.
+                            These vary year to year, but
+                            examples include bowling, sightseeing, barbecues, paintball, or virtually anything the
+                            organisers can come up with.
+                            <br><br>
+                            Although the name sounds serious, fear not dear Student. From the first smiles at
+                            registration through to the final
+                            echoes of splintering chalk, this event is for you. Do not worry about your English, you
+                            will manage just fine. Take
+                            your friends, both the journey and the event itself are always more cheerful in a group.
+                            Feeling ambitious? Test your
+                            skills by preparing either a lecture or a poster, ultimately we are here to learn from one
+                            another.
+                            <br><br>
+                            We extend a sincere invitation for you to come and join us – your time here will be a blast.
+                            In case of any questions,
+                            feel free to contact us at: kmsuj@uj.edu.pl.
+
+                            We are looking forward to having you with us!
+                            {% endif %}
+                        </p>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features -->
+
+
+
+{% endblock %}
+{% block language %}
+<li>
+    {% if language == 'pl' %}
+    <a href="{% url 'workshop_index' 'en' %}"><img class="flag" src="{% static 'images/en.png' %}"></a>
+    {% else %}
+    <a href="{% url 'workshop_index' 'pl' %}"><img class="flag" src="{% static 'images/pl.png' %}"></a>
+    {% endif %}
+</li>
+{% endblock %}

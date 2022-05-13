@@ -18,7 +18,7 @@
 $UJ-blue: #005ca7;
 $header-footer-color: #062e4e;
 $header-footer-color-ossm: #490808;
-$header-footer-color-warsztaty: #115c0cc7;
+$header-footer-color-workshop: #115c0cc7;
 $tab-chosen-color: rgba(255, 255, 255, 0.212);
 $light-text-color: #fff;
 $dark-text-color: #000;
@@ -762,7 +762,6 @@ $light-background: #fff;
 		right: 0;
 		bottom: 0;
 		font-size: 0.9em;
-
 		ul {
 			list-style: none;
 			padding-left: 0;
@@ -1198,8 +1197,9 @@ $light-background: #fff;
 				.link {
 					display: block;
 					text-decoration: none;
-					height: 54px;
-					line-height: 54px;
+					min-height: 54px;
+					overflow-x: clip;
+					line-height: 50px;
 					border-top: solid 1px #e8e8e8;
 					color: #696969;
 
@@ -1236,6 +1236,26 @@ $light-background: #fff;
 				.depth-0 {
 					color: #444;
 					font-weight: 800;
+				}
+				.text-1 {
+					display: inline-block;
+					width: 90%;
+				}
+				.text-2 {
+					display: inline-block;
+					width: 85%;
+				}
+				.text-3 {
+					display: inline-block;
+					width: 80%;
+				}
+				.text-4 {
+					display: inline-block;
+					width: 75%;
+				}
+				.text-5 {
+					display: inline-block;
+					width: 70%;
 				}
 			}
 
@@ -1483,10 +1503,16 @@ $light-background: #fff;
 .header-footer-colors-KMSUJ {
 	background-color: $header-footer-color;
 }
-.header-footer-colors-WARSZTATY {
-	background-color: $header-footer-color-warsztaty;
+.header-footer-colors-WORKSHOP {
+	background-color: $header-footer-color-workshop;
 }
 .resizable {
 	max-width: 100%;
     height: auto;
+}
+.flag {
+	display: inline-block;
+	height: 100%;
+	position: relative;
+  transform: translateY(30%);
 }

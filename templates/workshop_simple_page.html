@@ -1,0 +1,50 @@
+{% extends "base_workshop.html" %}
+{% load static %}
+{% block content %}
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row gtr-200">
+            <div class="col-12 col-12-medium imp-medium">
+
+                <!-- Content -->
+                <div id="content">
+                    <section class="last">
+                        {% if can_edit %}
+                        <h2> <a href="{% url 'workshop_page_edit' page.name language %}">
+                                {% if language == 'pl' %}
+                                {{ page.title_polish}}
+                                {% else %}
+                                {{ page.title }}
+                                {% endif %}
+                            </a></h2>
+                        {% else %}
+                        <h2>{% if language == 'pl' %}
+                            {{ page.title_polish}}
+                            {% else %}
+                            {{ page.title }}
+                            {% endif %}}</h2>
+                        {% endif %}
+                        {% if language == 'pl' %}
+                        {{ page_content_polish }}
+                        {% else %}
+                        {{ page_content}}
+                        {% endif %}
+
+
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block language %}
+<li>
+    {% if language == 'pl' %}
+    <a href="{% url 'workshop_page' page.name 'en' %}"><img class="flag" src="{% static 'images/en.png' %}"></a>
+    {% else %}
+    <a href="{% url 'workshop_page' page.name 'pl' %}"><img class="flag" src="{% static 'images/pl.png' %}"></a>
+    {% endif %}
+</li>
+{% endblock %}

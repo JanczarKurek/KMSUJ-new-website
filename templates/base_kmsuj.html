@@ -30,11 +30,12 @@
 {% block dropdown_links %}
     <li>
         <a href="#">Konferencje</a>
+        <ul>
         {% for c in dropdown_links %}
-            <ul>
+            
                 <li><a href="{{ c.link }}">{{ c.title }}</a></li>
-            </ul>
         {% endfor %}
+        </ul>
     </li>
 {% endblock %}
 

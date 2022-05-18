@@ -94,9 +94,9 @@ def workshop_index_view(request, lang='en'):
     context = get_context(request, "WORKSHOP", lang)
 
     if lang == 'PL':
-        context['title'] = "WARSZTATY"
+        context['title'] = "Międzynarodowe Warsztaty dla Młodych Matematyków"
     else :
-        context['title'] = "WORKSHOP"
+        context['title'] = "International Workshop for Young Mathematicians"
 
     context['is_index'] = True
 

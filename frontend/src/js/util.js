@@ -15,7 +15,11 @@
 			var	$this = $(this),
 				indent = Math.max(0, $this.parents('li').length - 1),
 				href = $this.attr('href'),
-				target = $this.attr('target');
+				target = $this.attr('target'),
+				text = $this.text();
+			if (typeof href !== 'undefined' && href != '' && (href.includes('en') || href.includes('pl')) && text == ''){
+				text = (href.includes('en')) ? 'Change the language to EN' : 'Change the language to PL'; 
+			};
 			b.push(
 				'<a ' +
 					'class="link depth-' + indent + '"' +
@@ -23,7 +27,7 @@
 					( (typeof href !== 'undefined' && href != '') ? ' href="' + href + '"' : '') +
 				'>' +
 					'<span class="indent-' + indent + '"></span>' +
-					'<span class="text-' + indent + '">' + $this.text() +  + '</span>' +
+					'<span class="text-' + indent + '">' + text + '</span>' +
 				'</a>'
 			);
 

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block logo %}
+<a href="{% url 'workshop_index' language %}" class="image" style="width:40%">
+    {% if language == 'pl' %} 
+    <img src="{% static 'images/warsztaty_logo_pl.png' %}">
+    {% else %}
+    <img src="{% static 'images/warsztaty_logo_en.png' %}">
+    {% endif %}
+    </a>
+{% endblock %}
+
+{% block index_link %}
+<a href="{% url 'workshop_index' language %}">
+    {% if language == 'pl' %}
+    Strona główna
+    {% else %}
+    Main page
+    {% endif %}
+</a>
+{% endblock %}
+{% block contact_link %}
+<a href="{% url 'workshop_page' 'contact' language %}">
+    {% if language == 'pl' %}
+    Kontakt
+    {% else %}
+    Contact
+    {% endif %}
+</a>
+{% endblock %}
+
+{% block pages %}
+{% for p in main_pages %}
+<li><a href="{% url 'workshop_page' p.name language %}">
+        {% if language == 'pl' %}
+        {{ p.title_polish }}
+        {% else %}
+        {{ p.title }}
+        {% endif %}
+    </a></li>
+{% endfor %}
+<li>
+</li>
+{% if request.user.is_superuser %}
+<li><a href="{% url 'workshop_page_add' %}">Dodaj stronę</a></li>
+{% endif %}
+{% endblock %}
+
+{% block bottom %}
+<section class="widget contact last">
+    <h3>{% if language == 'pl' %} Kontakt {% else %} Contact {% endif %}</h3>
+    <ul>
+        <li><a href="https://www.facebook.com/youngmathkrak" class="icon brands fa-facebook-f"><span
+                    class="label">Facebook</span></a></li>
+        <li><a href="https://www.instagram.com/kms_uj/" class="icon brands fa-instagram"><span
+                    class="label">Instagram</span></a></li>
+        <li><a href="https://www.linkedin.com/company/kmsuj/" class="icon brands fa-linkedin"><span
+                    class="label">LinkedIn</span></a></li>
+    </ul>
+    {% if language == 'pl' %}
+    <p>Koło Matematyków Studentów Uniwersytetu Jagiellońskiego im. prof. Stanisława Zaremby <br />
+        Łojasiewicza 6/1008, 30-348 Kraków<br />
+        telefon: (+48) 12 664 76 08 <br />
+        email: kmsuj@uj.edu.pl
+    </p>
+    {% else %}
+    <p> The Zaremba Society of Mathematicians - Students of the Jagiellonian University <br />
+        Łojasiewicza 6/1008, 30-348 Kraków<br />
+        Poland <br />
+        phone: (+48) 12 664 76 08 <br />
+        email: kmsuj@uj.edu.pl
+    </p>
+    {% endif %}
+    Change language: {% block language %}{% endblock %}
+</section>
+{% endblock %}

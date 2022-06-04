@@ -55,7 +55,7 @@
 									{% for link in additional_links %}
 										<li><a href="{{ link.link }}">{{ link.title }}</a></li>
 									{% endfor %}
-									{% if kontakt %}
+									{% if contact %}
 										{% if is_contact %}
 										<li class="current">
 										{% else %}
@@ -63,6 +63,8 @@
 										{% endif %}
 										{% block contact_link %}{% endblock %}</li>
 									{% endif %}
+									{% block language %}
+									{% endblock %}
 								</ul>
 							</nav>
 

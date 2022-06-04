@@ -6,4 +6,5 @@ webpack==6.0.0
 django-tinymce4-lite==1.8.0
 django-crispy-forms==1.13.0
 django-bleach==1.0.0
+bleach==5.0.0
 bleach[css]

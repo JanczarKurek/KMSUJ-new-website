@@ -41,28 +41,28 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
 ]
 
-LOGGING_ROOT = os.environ['DJANGO_LOGGING_ROOT']
+# LOGGING_ROOT = os.environ['DJANGO_LOGGING_ROOT']
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'level': 'WARNING',
-        },
-        'file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'level': 'INFO',
-            'filename': os.path.join(LOGGING_ROOT, "info.log"),
-            'maxBytes': 8 * 1024 * 1024,
-            'backupCount': 8,
-        },
-    },
-    'root': {
-        'handlers': ['file', 'console'],
-    },
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'level': 'WARNING',
+#         },
+#         'file': {
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'level': 'INFO',
+#             'filename': os.path.join(LOGGING_ROOT, "info.log"),
+#             'maxBytes': 8 * 1024 * 1024,
+#             'backupCount': 8,
+#         },
+#     },
+#     'root': {
+#         'handlers': ['file', 'console'],
+#     },
+# }
 
 
 # Application definition
@@ -114,15 +114,22 @@ WSGI_APPLICATION = 'kmsuj_website.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASE_ROOT = os.environ["DATABASE_ROOT_DIR"]
+# DATABASE_ROOT = os.environ["DATABASE_ROOT_DIR"]
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(DATABASE_ROOT, 'db.sqlite3'),
+#     }
+# }
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(DATABASE_ROOT, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -203,7 +210,7 @@ BLEACH_ALLOWED_STYLES = [
     'padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
     'text-align', 'title', 'page-break-after', 'display', 'color', 'background-color',
     'font-size', 'line-height', 'border-collapse', 'border-spacing', 'empty-cells', 'border',
-    'list-style-type',
+    'list-style-type', 'vertical-align',
 ]
 
 # Strip unknown tags if True, replace with HTML escaped characters if

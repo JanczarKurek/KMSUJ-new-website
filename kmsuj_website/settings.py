@@ -123,7 +123,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -203,7 +202,7 @@ BLEACH_ALLOWED_STYLES = [
     'padding', 'padding-top', 'padding-bottom', 'padding-left', 'padding-right',
     'text-align', 'title', 'page-break-after', 'display', 'color', 'background-color',
     'font-size', 'line-height', 'border-collapse', 'border-spacing', 'empty-cells', 'border',
-    'list-style-type',
+    'list-style-type', 'vertical-align',
 ]
 
 # Strip unknown tags if True, replace with HTML escaped characters if

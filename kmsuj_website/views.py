@@ -159,7 +159,7 @@ def page_edit_view_base(request, site, name=None):
         if site == 'WORKSHOP':
             page = get_object_or_404(BilingualPage, name=name)
         else :
-            page = get_object_or_404(Page, name=name)
+            page = get_object_or_404(Page, name=name, site=site)
         title = page.title
         has_permissions = request.user.is_superuser
     
